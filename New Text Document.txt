@@ -1,0 +1,28 @@
+#include <stdio.h>
+int main() {
+    int saved_pin = 0000; 
+    int entered_pin;
+    int attempts = 0;
+    int max_attempts = 3;
+    printf("--- Welcome to the ATM ---\n");
+    while (attempts < max_attempts) {
+        printf("\nEnter your 4-digit PIN: ");
+        scanf("%d", &entered_pin);
+        if (entered_pin == saved_pin) {
+            printf("Access Granted! You can now access your account.\n");
+            break; 
+        } else {
+            attempts++;
+            int remaining = max_attempts - attempts;
+            
+            if (remaining > 0) {
+                printf("Incorrect PIN. You have %d attempts left.\n", remaining);
+            } else {
+                printf("\n*** CARD BLOCKED ***\n");
+                printf("Too many incorrect attempts. Please contact your bank.\n");
+            }
+        }
+    }
+
+    return 0;
+}
