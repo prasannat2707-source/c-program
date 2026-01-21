@@ -1,0 +1,28 @@
+to calculate the the tables using 3d array
+#include <stdio.h>
+
+int main(){
+    int twod[3][2][3]={
+                         {1,2,3},{4,5,6},
+        
+                       },
+                       
+                       {
+                           {7,8,9},{10,11,12},
+                           
+                       },
+                       
+                       {
+                           {13,14,15},{16,17,18},
+                           
+                       };
+                       
+    int h,i,j;
+    for(h=0;h<3;h++){
+        printf("Table %d\n",h);
+        for(i=0;i<2;i++){
+            printf("%d\n",twod[h][i][j]);
+        }
+    }
+    return 0;
+}
