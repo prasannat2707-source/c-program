@@ -1,0 +1,8 @@
+#include<stdio.h>
+int myfunction(int x,int y){
+    return x + y;
+}
+  int main(){
+    printf("My total value is %d",myfunction(5,5));
+    return 0;
+}
