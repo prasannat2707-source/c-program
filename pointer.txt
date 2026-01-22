@@ -1,0 +1,10 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+
+int main() {
+   int mynum = 10;
+   
+   printf("%d\n",mynum);
+   printf("%p",mynum);
+    return 0;
+}
