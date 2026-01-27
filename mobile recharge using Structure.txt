@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+struct Recharge {
+     long mobileNumber;
+    float amount;
+};
+
+int main() {
+    struct Recharge ph1;
+
+    ph1.mobileNumber = 9361587256;
+    ph1.amount = 349.0;
+
+    printf("Mobile Recharge Details\n");
+    printf("------------------------\n");
+    printf("Mobile Number : %ld\n", ph1.mobileNumber);
+    printf("Recharge Amount : %.2f\n", ph1.amount);
+
+    return 0;
+}
