@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct Product {
+    char name[50];
+    int price;
+};
+struct OrderNode {
+    int orderID;
+    struct Product prod;
+    char status[20];
+    struct OrderNode *next;
+};
+struct OrderNode* createOrder(int id, char *pName, int price, char *stat) {
+    struct OrderNode *newNode = (struct OrderNode*)malloc(sizeof(struct OrderNode));
+    
+    if (newNode == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(0);
+    }
+    newNode->orderID = id;
+    strcpy(newNode->prod.name, pName);  
+    newNode->prod.price = price;       
+    strcpy(newNode->status, stat);
+    newNode->next = NULL;
+
+    return newNode;
+}
+void displayOrders(struct OrderNode *head) {
+    struct OrderNode *temp = head;
+
+    while (temp != NULL) {
+        printf("%d %s %d %s -> ", 
+               temp->orderID, 
+               temp->prod.name, 
+               temp->prod.price, 
+               temp->status);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct OrderNode *head = NULL;
+    head = createOrder(201, "Mouse", 500, "Delivered");
+    struct OrderNode *order2 = createOrder(202, "Keyboard", 1500, "Pending");
+    head->next = order2;
+    displayOrders(head);
+
+    return 0;
+}
