@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Node {
+    char station[10];
+    struct Node* prev;
+    struct Node* next;
+};
+
+void insertAtEnd(struct Node** head, char station[]) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    strcpy(newNode->station, station);
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        newNode->prev = NULL;
+        *head = newNode;
+        return;
+    }
+
+    struct Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    temp->next = newNode;
+    newNode->prev = temp;
+}
+
+void display(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%s<->", temp->station);
+        temp = temp->next;
+    }
+    printf("NULL");
+}
+
+int main() {
+    struct Node* head = NULL;
+
+    insertAtEnd(&head, "A1");
+    insertAtEnd(&head, "B2");
+    insertAtEnd(&head, "C3");
+
+    display(head);
+
+    return 0;
+}

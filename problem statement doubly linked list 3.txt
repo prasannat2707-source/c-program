@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int orderId;
+    struct Node* prev;
+    struct Node* next;
+};
+
+void insertAtEnd(struct Node** head, int orderId) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->orderId = orderId;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        newNode->prev = NULL;
+        *head = newNode;
+        return;
+    }
+
+    struct Node* temp = *head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newNode;
+    newNode->prev = temp;
+}
+
+void insertAtPosition(struct Node** head, int orderId, int position) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->orderId = orderId;
+
+    if (position == 1) {
+        newNode->prev = NULL;
+        newNode->next = *head;
+        if (*head != NULL)
+            (*head)->prev = newNode;
+        *head = newNode;
+        return;
+    }
+
+    struct Node* temp = *head;
+    int count = 1;
+
+    while (count < position - 1 && temp != NULL) {
+        temp = temp->next;
+        count++;
+    }
+
+    if (temp == NULL)
+        return;
+
+    newNode->next = temp->next;
+    newNode->prev = temp;
+
+    if (temp->next != NULL)
+        temp->next->prev = newNode;
+
+    temp->next = newNode;
+}
+
+void display(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d<->", temp->orderId);
+        temp = temp->next;
+    }
+    printf("NULL");
+}
+
+int main() {
+    struct Node* head = NULL;
+
+    insertAtEnd(&head, 101);
+    insertAtEnd(&head, 102);
+    insertAtEnd(&head, 104);
+
+    insertAtPosition(&head, 103, 3);
+
+    display(head);
+
+    return 0;
+}

@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition of the node
+struct Node {
+    int songId;
+    struct Node* prev;
+    struct Node* next;
+};
+
+// Insert a new song at the beginning
+void insertAtBeginning(struct Node** head, int songId) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+
+    newNode->songId = songId;
+    newNode->prev = NULL;
+    newNode->next = *head;
+
+    if (*head != NULL) {
+        (*head)->prev = newNode;
+    }
+
+    *head = newNode;
+}
+
+// Display playlist in forward direction
+void displayForward(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d<->", temp->songId);
+        temp = temp->next;
+    }
+    printf("NULL");
+}
+
+int main() {
+    struct Node* head = NULL;
+
+    // Test case inserts
+    insertAtBeginning(&head, 30);
+    insertAtBeginning(&head, 20);
+    insertAtBeginning(&head, 10);
+
+    // Display updated playlist
+    displayForward(head);
+
+    return 0;
+}
