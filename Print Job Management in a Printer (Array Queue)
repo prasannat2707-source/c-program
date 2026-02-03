@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 5
+
+char queue[MAX][10];   // To store job IDs like J1, J2
+int front = -1, rear = -1;
+
+/* Check if queue is empty */
+int isEmpty() {
+    return (front == -1);
+}
+
+/* Add print job */
+void enqueue(char jobID[]) {
+    if (rear == MAX - 1) {
+        printf("Print queue is full\n");
+        return;
+    }
+    if (front == -1)
+        front = 0;
+    rear++;
+    strcpy(queue[rear], jobID);
+    printf("Print job %s added\n", jobID);
+}
+
+/* Print and remove job */
+void dequeue() {
+    if (isEmpty()) {
+        printf("No print jobs to process\n");
+        return;
+    }
+    printf("Job printed: %s\n", queue[front]);
+
+    if (front == rear) {
+        front = rear = -1;
+    } else {
+        front++;
+    }
+}
+
+/* Show next job */
+void displayFront() {
+    if (isEmpty()) {
+        printf("No pending print jobs\n");
+    } else {
+        printf("Next job to print: %s\n", queue[front]);
+    }
+}
+
+/* Display number of jobs */
+void queueSize() {
+    if (isEmpty()) {
+        printf("Pending jobs: 0\n");
+    } else {
+        printf("Pending jobs: %d\n", rear - front + 1);
+    }
+}
+
+int main() {
+    enqueue("J1");
+    enqueue("J2");
+    enqueue("J3");
+
+    dequeue();
+    displayFront();
+    queueSize();
+
+    return 0;
+}
